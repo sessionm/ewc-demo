@@ -1,0 +1,183 @@
+body {
+    background: #f9f9f9;
+}
+.wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2em;
+}
+
+.headerFade {
+    background: linear-gradient( to bottom, rgba(255,255,255,1), rgba(0,0,0,0));
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 60px;
+    z-index: 100;
+    background-blend-mode: color-dodge;
+}
+
+.header{
+    width: 100%;
+    text-align: center;
+    height: 60px;
+    pointer-events: none;
+}
+
+.header img {
+    width: 60px;
+}
+
+@-webkit-keyframes moveBG {
+   from {
+     background-position-x: 0px;
+   }
+   to {
+     background-position-x: 200000px;
+   }
+}
+
+@-webkit-keyframes fadeIn {
+   from {
+     color: white;
+   }
+   to {
+     color: black;
+   }
+}
+
+.header .nameContainer {
+    position: relative;
+}
+
+.header .name {
+    line-height: 1em;
+    position: absolute;
+    font-family: 'Catamaran', sans-serif;
+    font-size: 5em;
+    background: #f9f9f9;
+    width:100%;
+    mix-blend-mode: lighten;
+    margin-right: -1px;
+    text-shadow: 3px 0px 5px rgba(0, 0, 0, 0.2);
+    /*-webkit-text-stroke: 2px #ffbf00;*/
+}
+
+.bolt {
+    mix-blend-mode: lighten;
+    position: absolute;
+    background: white;
+}
+
+.header .nameContainer .name .letter {
+    display: inline-block;
+    width: auto;
+    float: left;
+    position: relative;
+}
+
+.header .nameContainer .bg {
+    background: url("./snow2.gif");
+    background-size: contain;
+    background-repeat: repeat-x;
+    width: 330px;
+    height: 56px;
+    margin: auto;
+    /*-webkit-animation-name: moveBG;
+    -webkit-animation-duration: 100000s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;*/
+}
+
+
+.coolHeader {
+    background: url("./snow2.gif");
+    background-size: contain;
+    background-repeat: repeat-x;
+}
+
+.info, .download, #md {
+    /*font-family: 'Titillium Web', sans-serif;*/
+    /*font-size: 16px;
+    font-weight: 0;
+    line-height: 1.5em;
+    color: #555;*/
+}
+
+
+h1 {
+    background: none !important;
+    font-size: 2em !important;
+    padding: 0 !important;
+}
+
+.download img {
+    width: 100%;
+}
+
+.download:hover {
+    transition: .2s all;
+    background: rgba(0,0,0,.05);
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.pages {
+    margin: auto;
+    margin-top: 1em;
+    width: auto;
+    display: flex;
+    width: 330px;
+}
+.pages .link {
+    float: left;
+    padding: 1em;
+}
+.pages .link:hover {
+    transition: .2s all;
+    background: rgba(0,0,0,.05);
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.api code {
+    color: blue;
+}
+
+.sideView img {
+    position: relative;
+    margin-bottom: 1em;
+    border: 1px solid #d6d6d6;
+    border-radius: 2px;
+    /*top: 50%;*/
+    /*transform: translateY(50%);*/
+    width: 100%;
+}
+
+.fullView {
+    position: relative;
+    margin-bottom: 1em;
+    border: 1px solid #d6d6d6;
+    border-radius: 2px;
+    /*top: 50%;*/
+    /*transform: translateY(50%);*/
+    width: 100%;
+}
+.divider{
+    width: 100%;
+    height: 1px;
+    background: linear-gradient( to right, rgba(0,0,0,0), rgba(0,0,0,.4), rgba(0,0,0,0));
+    margin-top: 2em;
+    margin-bottom: 2em;
+    text-align: center;
+}
+
+.divider:after {
+    content: "\25C6";
+    background: #f9f9f9;
+    padding: .5em;
+    position: relative;
+    bottom: 12px;
+    color: #777;
+    font-size: 10px;
+}
