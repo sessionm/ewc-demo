@@ -77,7 +77,7 @@ body {
 }
 
 .header .nameContainer .bg {
-    background: url("./snow2.gif");
+    background: url("./images/snow2.gif");
     background-size: contain;
     background-repeat: repeat-x;
     width: 330px;
