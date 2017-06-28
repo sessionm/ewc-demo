@@ -1,337 +1,79 @@
-<!--
-Copyright (c) 2017 SessionM
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
--->
-
 <!doctype html>
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Obsidian Documentation</title>
-
-        <!-- JQUERY -->
+        <title>Test</title>
+        <script src="./loyalty.js"></script>
+        <link rel="stylesheet" type="text/css" href="./loyalty.css">
+        <link rel="stylesheet" type="text/css" href="./styles/custom-styles.css">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         <script
           src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
           integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
           crossorigin="anonymous"></script>
-
-        <!-- PRISM SYNTAX HIGHLIGHTING -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/components/prism-core.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/components/prism-css.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/components/prism-clike.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/components/prism-javascript.min.js" ></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/components/prism-markup.min.js" ></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.6.0/themes/prism.css" />
-
-        <!-- BOOTSTRAP -->
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-        <!-- SHOWDOWN MARKDOWN HIGHLIGHTING -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.6.4/showdown.min.js"></script>
-
-        <!-- STYLES -->
-        <link href="https://fonts.googleapis.com/css?family=Titillium+Web:300" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Catamaran:900" rel="stylesheet">
-
-        <link rel="stylesheet" type="text/css" href="styles.css">
         <meta name="viewport" content="width=device-width" />
     </head>
-    <body>
-        <div class="wrap">
-            <div class="headerFade"></div>
-            <div class="header">
-                <!-- <img src="./images/obsidian.png"> -->
-                <div class="nameContainer">
-                    <!-- <img src="bolt.svg" class="bolt"> -->
-                    <div class="name">
-                        OBSIDIAN
-                    </div>
-                    <div class="bg"></div>
-                </div>
-            </div>
-            <div class="pages">
-                <div class="link">GET STARTED</div>
-                <div class="link">WIDGETS</div>
-                <div class="link">SMP CONFIG</div>
-            </div>
-            <div class="divider"></div>
-
-            <div class="info">
-                <div class="row download">
-                    <div class="col-xs-4 col-sm-2">
-                        <img src="./images/package.png">
-                    </div>
-                    <div class="col-xs-8 col-sm-10">
-                        <h1> Example Project </h2>
-                            <p>
-                            Download the example project here. This .zip file contains a simple html page with a sample js implementation of the embeddable web components.
-                            The .zip also contains the most recent versions of the .js and .css files for the project.
-                            </p>
-                    </div>
-                </div>
-
-                <div class="row download">
-                    <div class="col-xs-4 col-sm-2">
-                        <img src="./images/js.png">
-                    </div>
-                    <div class="col-xs-8 col-sm-10">
-                        <h1> sessionM.js Library </h2>
-                            <p>
-                            Download the example project here. This .zip file contains a simple html page with a sample js implementation of the embeddable web components.
-                            The .zip also contains the most recent versions of the .js and .css files for the project.
-                            </p>
-                    </div>
-                </div>
-
-                <div class="row download">
-                    <div class="col-xs-4 col-sm-2">
-                        <img src="./images/css.png">
-                    </div>
-                    <div class="col-xs-8 col-sm-10">
-                        <h1> stylesheet.css </h2>
-                            <p>
-                            Download the example project here. This .zip file contains a simple html page with a sample js implementation of the embeddable web components.
-                            The .zip also contains the most recent versions of the .js and .css files for the project.
-                            </p>
-                    </div>
-                </div>
-            </div>
-            <div class="divider"></div>
-            <div class="row">
-                <div class="col-xs-12 col-sm-6 sideView">
-                    <img src="./images/screenie.png">
-                    <img src="./images/screenie2.png">
-
-                </div>
-<div class="col-xs-12 col-sm-6">
-<div class="md">
-# Set up the Example Project
-- Download the .zip and pull the contents out into a folder on your Desktop, name it `ewc_test`
-- Open your terminal and type `sudo nano /etc/hosts`
-- This will open your macbook's hosts file in a terminal file editor nano
-- Add the following line to the file:
-`127.0.0.1       test.q-sessionm.com`
-    * This allows the example project to pass the QA1 cors policy and hit the API endpoints.
-- Press `Control+O` to write the file, press enter to confirm
-- Press `Control+X` to exit nano
-- Now you will navigate to the working directory
-- Type `cd ~/Desktop/ewc_test`, this takes you to the folder you made earlier
-- enter `python -m SimpleHTTPServer 8080`, this will create a local web server and host the content in the directory (You must use the port 8080 to pass QA1 cors policy)
-- Open your browser and go to `test.q-sessionm.com:8080`
-
-The library is sessionm.js, and it is included via script tag and initialized with JS.
-The accompanying styles are in styles.css, these styles are explicitly namespaced and can easily be overwritten and modified by including or declaring css after this file is loaded.
-</div>
-</div>
-</div>
-
-<div class="divider"></div>
-
-<div class="md">
-#Include appropriate files
-Open the Directory in an IDE (Atom or Sublime are nice)
-- The `sessionm.js` library is included with script src
-- The `styles.css` library is included with link tag
-- Inlcude your own styles after importing the sessionm specific styles so you can override them explicitly
-- set viewport device width to enable responsive design
-- sessionm components are auto-responsive inside their parent container using `element queries`
-</div>
-<pre><code class="language-markup"><xmp>
-    <head>
-        <meta charset="utf-8">
-        <title>Test</title>
-        <script src="api/0.1.0/sessionm.js"></script>
-        <link rel="stylesheet" type="text/css" href="styles.css">
-        <link rel="stylesheet" type="text/css" href="custom-styles.css">
-        <meta name="viewport" content="width=device-width" />
-    </head>
-
-</xmp></code></pre>
-<div class="divider"></div>
-<div class="md">
-#Set up widget containers
-- the page body contains some divs with #id's that will allow you to spawn sessionM components inside them
-- div's with `#balanceBar`, `#rewardStore`, and `#earnFeed` are created to give the JS a place to spawn the components
-</div>
-<pre><code class="language-markup"><xmp>
     <body>
         <div class="wrap">
             <div class="navwrap">
-                <img class="nav" src="./header.png" />
+                <a class="logowrap" href="/">
+                    <img class="nav" src="./images/header.png" />
+                </a>
+                <i class="fa fa-paint-brush" id="themer"></i>
+                <div id="oAuth"></div>
             </div>
             <div id="balanceBar"></div>
-            <div id="rewardStore"></div>
-            <div id="earnFeed"></div>
+            <div id="left">
+                <div id="rewardStore"></div>
+                <div id="inboxNav"></div>
+                <div id="inbox"></div>
+            </div>
+            <div id="right">
+                <div id="earnFeed"></div>
+            </div>
         </div>
     </body>
+    <script>
+        // call init(args, callback) on SessionM instance
+        // to initialize the library manually, pass in the parameter `authToken`
+        SessionM.init({
+            "apiKey" : "89c7ef5f669384c7fbbfe5ea748f37be8b2a5c66",
+            "baseUrl": "https://api-qa1.q-sessionm.com/api/v1/apps/",
+        })
+        .catch(function(error) {
+            console.warn("Got an error: " + error.errors.message);
+        });
 
-</xmp></code></pre>
-<div class="divider"></div>
-<div class="md">
-#Initialize the SessionM.js library
-- js is contained in the script tag at the bottom of the page
-- you can move this out to its own .js file, and you can embed it in your own js code
-</div>
-<pre><code class="language-javascript">
-    SessionM.init({
-        "authToken" : "v2--XqBijQF3QhZQT6JCQHDNQHJQanHlX_SrG3IZl-TmYXY=--tzwtjSCrI47gTihjVu59hokT5SFS0fcLQXqE0qciI04jrQF7OvklrSDBu0Q_kFrinw==",
-        "apiKey" : "89c7ef5f669384c7fbbfe5ea748f37be8b2a5c66",
-        "baseUrl": "https://api-qa1.q-sessionm.com/api/v1/apps/"
-    }, function() {
-        //promise completes and calls this function
-        //this method is old and will be deprecated in favor of promise chaining, see below for new usage
-    })
-    .then(function(){
+        SessionM.createLoginButton({
+            "id": "oAuth",
+            "config": {
+                "loginUrl": "login-qa1.q-sessionm.com",
+                "clientId": "4c767925bedbd78db6064ec212044a273dc22ebd42e2d688bad404423423d737",
+                "callbackUrl": "http://test.q-sessionm.com:8080"
+            }
+        });
         SessionM.createBalanceBar({
             "id": "balanceBar"
         });
         SessionM.createEarnFeed({
-            "id": "earnFeed",
-            "config": {
-                "useSimpleTile": false
-            }
+            "id": "earnFeed"
         });
         SessionM.createRewardStore({
             "id": "rewardStore",
             "config": {
-                "maxOffers": 1,
-                "showMoreIncrement": 1,
+                "maxOffers": 3,
+                "showMoreIncrement": 3,
             }
         });
-    })
-    .catch(function(error) {
-        console.warn("Got an error: " + error.errors.message);
-    });
+        SessionM.createInboxNotifier({
+            "id": "inboxNav"
+        });
+        SessionM.createInbox({
+            "id": "inbox"
+        });
 
-</code></pre>
-<div class="md">
-- Call `SessionM.init(args);` with the appropriate parameters
-- the `init()` returns a `Promise()`
-- call `.then(function(result){ ... })` on the `init()` and create components after the `init()` resolves
-- if the `init()` does not resolve, you can call `.catch(function(error){ ... })` on it and log the error or perform appropriate actions to resolve the initialization failure, such as using backend services to generate a new auth token in the event that the library could not initialize due to an `invalid auth token`.
-</div>
-<div class="divider"></div>
-<h1>Components</h2>
-<div class="md api">
-####`SessionM.init([Object],[Function]);`
-##### Initializes the SessionM.js library and allows you create components
-</div>
-<pre><code class="language-javascript">
-    SessionM.init({
-        "authToken" : "v2--XqBijQF3QhZQT6JCQHDNQHJQanHlX_SrG3IZl-TmYXY=--tzwtjSCrI47gTihjVu59hokT5SFS0fcLQXqE0qciI04jrQF7OvklrSDBu0Q_kFrinw==",
-        "apiKey" : "89c7ef5f669384c7fbbfe5ea748f37be8b2a5c66",
-        "baseUrl": "https://api-qa1.q-sessionm.com/api/v1/apps/",
-        "config": { ... }
-    }, function() { ... });
-
-</code></pre>
-<div class="md api">
-`@param {Object}`
-- `{String} authToken` is the user auth token generated by [this route in the s2s API](https://mmc.sessionm.com/docs/server2server/#authorization-tokens-api)
-- `{String} apiKey` is the public key that you get when you create a new App within the `SMP`
-- `{String} baseUrl` is the api endpoint for your `SMP` app, where all information for the widgets is kept
-- *`OPTIONAL`* `{Object} config` is a config object that is passed to the init, currently empty but will contain valuable config parameters soon
-
-`@param {Function}` callback a callback function that is called when promise completes. **`this will be deprecated soon`**
-
-`@returns {Promise}` can be used to call `.then() `to load components, and `.catch()` to resolve and log errors
-
-</div>
-<div class="divider"></div>
-<div class="md api">
-####`SessionM.createBalanceBar([Object]);`
-##### Creates a widget that shows the User's current point balance.
-</div>
-<img class="fullView" src="./images/balanceBar.png" >
-<pre><code class="language-javascript">
-    SessionM.createBalanceBar({
-        "id": "balanceBar"
-    });
-
-</code></pre>
-<div class="md">
-`@param {Object}`
-- `{String} id` this is the id of the `div` element that will contain this widget when you call this method
-
-</div>
-<div class="divider"></div>
-<div class="md">
-####`SessionM.createEarnFeed([Object]);`
-##### Creates a widget that shows the Activity Feed, allowing the user to earn points and view Ads
-</div>
-<img class="fullView" src="./images/earnFeed.gif" >
-
-<pre><code class="language-javascript">
-    SessionM.createEarnFeed({
-       "id": "earnFeed",
-        "config": {
-            "useSimpleTile": false
-        }
-    });
-
-</code></pre>
-<div class="md api">
-`@param {Object}`
-- `{String} id` this is the id of the `div` element that will contain this widget when you call this method
-- `{Object} config` config parameters for this widget
-    - `{Boolean} useSimpleTile` allows you to use a simpler version of the earn tile that only contains a background image and header text
-
-</div>
-<div class="divider"></div>
-<div class="md api">
-####`SessionM.createRewardStore([Object]);`
-##### Creates a widget that shows the reward store, which allows the user to spend points and claim rewards
-</div>
-
-<img class="fullView" src="./images/rewardStore.gif" >
-
-<pre><code class="language-javascript">
-    SessionM.createRewardStore({
-       "id": "rewardStore",
-        "config": {
-            "maxOffers": 1,
-            "showMoreIncrement": 1,
-        }
-    });
-
-</code></pre>
-<div class="md api">
-`@param {Object}`
-- `{String} id` this is the id of the `div` element that will contain this widget when you call this method
-- `{Object} config` config parameters for this widget
-    - `{Number} maxOffers` this number limits how many offers are shown at once, as a form of pagination
-    - `{Number} showMoreIncrement` this is how many more offers are show when the `show more` button is clicked, as pagination
-
-</div>
-<div class="divider"></div>
-<!-- end of wrap and body -->
-</div>
-</body>
-<script>
-$( ".md" ).each(function( index ) {
-    (function(target) {
-        var html = new showdown.Converter().makeHtml(target.text());
-        target.replaceWith(html)
-    })($(this));
-});
-
-</script>
+        $("#themer").click(function() {
+            $('head').append('<link rel="stylesheet" type="text/css" href="./styles/alt-theme.css">');
+        });
+    </script>
 </html>

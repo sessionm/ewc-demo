@@ -1,0 +1,200 @@
+# Set up the Example Project
+- Download the .zip and pull the contents out into a folder on your Desktop, name it `ewc_test`
+- Open your terminal and type `sudo nano /etc/hosts`
+- This will open your macbook's hosts file in a terminal file editor nano
+- Add the following line to the file:
+`127.0.0.1       test.q-sessionm.com`
+    * This allows the example project to pass the QA1 cors policy and hit the API endpoints.
+- Press `Control+O` to write the file, press enter to confirm
+- Press `Control+X` to exit nano
+- Now you will navigate to the working directory
+- Type `cd ~/Desktop/ewc_test`, this takes you to the folder you made earlier
+- enter `python -m SimpleHTTPServer 8080`, this will create a local web server and host the content in the directory (You must use the port 8080 to pass QA1 cors policy)
+- Open your browser and go to `test.q-sessionm.com:8080`
+
+The library is sessionm.js, and it is included via script tag and initialized with JS.
+The accompanying styles are in styles.css, these styles are explicitly namespaced and can easily be overwritten and modified by including or declaring css after this file is loaded.
+---
+# Include appropriate files
+Open the Directory in an IDE (Atom or Sublime are nice)
+- The `sessionm.js` library is included with script src
+- The `styles.css` library is included with link tag
+- Inlcude your own styles after importing the sessionm specific styles so you can override them explicitly
+- set viewport device width to enable responsive design
+- sessionm components are auto-responsive inside their parent container using `element queries`
+```html
+<head>
+    <meta charset="utf-8">
+    <title>Test</title>
+    <script src="api/0.1.0/sessionm.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="custom-styles.css">
+    <meta name="viewport" content="width=device-width" />
+</head>
+```
+---
+# Set up widget containers
+- the page body contains some divs with #id's that will allow you to spawn sessionM components inside them
+- div's with `#balanceBar`, `#rewardStore`, and `#earnFeed` are created to give the JS a place to spawn the components
+```html
+<body>
+    <div class="wrap">
+        <div class="navwrap">
+            <img class="nav" src="./header.png" />
+        </div>
+        <div id="balanceBar"></div>
+        <div id="rewardStore"></div>
+        <div id="earnFeed"></div>
+    </div>
+</body>
+```
+---
+# Initialize the SessionM.js library
+- js is contained in the script tag at the bottom of the page
+- you can move this out to its own .js file, and you can embed it in your own js code
+```javascript
+SessionM.init({
+    "authToken" : "v2--XqBijQF3QhZQT6JCQHDNQHJQanHlX_SrG3IZl-TmYXY=--tzwtjSCrI47gTihjVu59hokT5SFS0fcLQXqE0qciI04jrQF7OvklrSDBu0Q_kFrinw==",
+    "apiKey" : "89c7ef5f669384c7fbbfe5ea748f37be8b2a5c66",
+    "baseUrl": "https://api-qa1.q-sessionm.com/api/v1/apps/"
+}, function() { // this callback() is invoked when the library is done loading all configs and fetches })
+.catch(function(error) {
+    console.warn("Got an error: " + error.errors.message);
+});
+SessionM.createLoginButton({
+    "id": "oAuth",
+    "config": {
+        "loginUrl": "login-qa1.q-sessionm.com",
+        "clientId": "4c767925bedbd78db6064ec212044a273dc22ebd42e2d688bad404423423d737",
+        "callbackUrl": "http://test.q-sessionm.com:8080"
+    }
+});
+SessionM.createBalanceBar({
+    "id": "balanceBar"
+});
+SessionM.createEarnFeed({
+    "id": "earnFeed",
+    "config": {
+        "useSimpleTile": false
+    }
+});
+SessionM.createRewardStore({
+    "id": "rewardStore",
+    "config": {
+        "maxOffers": 3,
+        "showMoreIncrement": 3,
+    }
+});
+SessionM.createInboxNotifier({
+    "id": "inboxNav"
+});
+SessionM.createInbox({
+    "id": "inbox"
+});
+```
+- Call `SessionM.init(args);` with the appropriate parameters
+- the `init()` returns a `Promise()` and also takes a callback function as a parameter
+- the callback method is for when you need to execute code that is guaranteed to run after the library fully loads
+- if the `init()` does not resolve, you can call `.catch(function(error){ ... })` on it and log the error or perform appropriate actions to resolve the initialization failure, such as using backend services to generate a new auth token in the event that the library could not initialize due to an `invalid auth token`.
+---
+#### `SessionM.init([Object],[Function]);`
+- Initializes the SessionM.js library and allows you create components
+```javascript
+SessionM.init({
+    "authToken" : "v2--XqBijQF3QhZQT6JCQHDNQHJQanHlX_SrG3IZl-TmYXY=--tzwtjSCrI47gTihjVu59hokT5SFS0fcLQXqE0qciI04jrQF7OvklrSDBu0Q_kFrinw==",
+    "apiKey" : "89c7ef5f669384c7fbbfe5ea748f37be8b2a5c66",
+    "baseUrl": "https://api-qa1.q-sessionm.com/api/v1/apps/",
+    "config": { ... }
+}, function() { ... });
+```
+`@param {Object}`
+- `{String} authToken` is the user auth token generated by [this route in the s2s API](https://mmc.sessionm.com/docs/server2server/#authorization-tokens-api)
+- `{String} apiKey` is the public key that you get when you create a new App within the `SMP`
+- `{String} baseUrl` is the api endpoint for your `SMP` app, where all information for the widgets is kept
+- *`OPTIONAL`* `{Object} config` is a config object that is passed to the init, currently empty but will contain valuable config parameters soon
+
+`@param {Function}` callback a callback function that is called when promise completes. **`this will be deprecated soon`**
+`@returns {Promise}` can be used to call `.then() `to load components, and `.catch()` to resolve and log errors
+---
+#### `SessionM.createLoginButton([Object]);`
+- Creates a login button, on click will redirect to a new page that will ask the user to oAuth into the sessionm platform.
+- This option requires your environment to be properly configured to support oAuth
+- If configuration does not exist, this method will not work. Use a standard auth token on init() instead
+```javascript
+SessionM.createLoginButton({
+    "id": "oAuth",
+    "config": {
+        "loginUrl": "login-qa1.q-sessionm.com",
+        "clientId": "4c767925bedbd78db6064ec212044a273dc22ebd42e2d688bad404423423d737",
+        "callbackUrl": "http://test.q-sessionm.com:8080"
+    }
+});
+```
+`@param {Object}`
+- `{String} id` this is the id of the `div` element that will contain this widget when you call this method
+- `{Object} config` config parameters for this widget
+    - `{String} loginUrl` This is the url that the login button redirects to, prompts the user to use oAuth
+    - `{String} clientId` This ID is generated by running configuring your environment
+    - `{String} callbackUrl` This is the URL that oAuth will be redirected back to once the user successfully logs in
+---
+#### `SessionM.createBalanceBar([Object]);`
+- Creates a widget that shows the User's current point balance.
+```javascript
+SessionM.createBalanceBar({
+    "id": "balanceBar"
+});
+```
+`@param {Object}`
+- `{String} id` this is the id of the `div` element that will contain this widget when you call this method
+- ---
+#### `SessionM.createEarnFeed([Object]);`
+- Creates a widget that shows the Activity Feed, allowing the user to earn points and view Ads
+```javascript
+SessionM.createEarnFeed({
+   "id": "earnFeed",
+    "config": {
+        "useSimpleTile": false
+    }
+});
+```
+`@param {Object}`
+- `{String} id` this is the id of the `div` element that will contain this widget when you call this method
+- `{Object} config` config parameters for this widget
+    - `{Boolean} useSimpleTile` allows you to use a simpler version of the earn tile that only contains a background image and header text
+---
+#### `SessionM.createRewardStore([Object]);`
+- Creates a widget that shows the reward store, which allows the user to spend points and claim rewards
+```javascript
+SessionM.createRewardStore({
+   "id": "rewardStore",
+    "config": {
+        "maxOffers": 1,
+        "showMoreIncrement": 1,
+    }
+});
+```
+`@param {Object}`
+- `{String} id` this is the id of the `div` element that will contain this widget when you call this method
+- `{Object} config` config parameters for this widget
+    - `{Number} maxOffers` this number limits how many offers are shown at once, as a form of pagination
+    - `{Number} showMoreIncrement` this is how many more offers are show when the `show more` button is clicked, as pagination
+---
+#### `SessionM.createInboxNotifier([Object]);`
+- Creates a widget that shows whether or not there are any unread messages in your inbox
+```javascript
+SessionM.createInboxNotifier({
+    "id": "inboxNav"
+});
+```
+`@param {Object}`
+- `{String} id` this is the id of the `div` element that will contain this widget when you call this method
+---
+#### `SessionM.createInbox([Object]);`
+- Creates a widget that shows inbox messages. Messages can be read, deleted, and opened in a new tab
+```javascript
+SessionM.createInbox({
+    "id": "inbox"
+});
+```
+`@param {Object}`
+- `{String} id` this is the id of the `div` element that will contain this widget when you call this method

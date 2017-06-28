@@ -1,0 +1,128 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.sessionm-app * {
+    font-family: arial !important;
+}
+
+#inbox {
+    border: 1px solid rgb(229, 229, 229);
+}
+#oAuth {
+    width: 230px;
+    float: right;
+}
+#rewardStore {
+    background: white;
+}
+#left {
+    width: 62.5%;
+    float: left;
+    margin: 0 auto;
+    overflow: auto;
+}
+#earnFeed {
+    background: white;
+}
+
+#right {
+    margin: 0 auto;
+    width: 35%;
+    overflow: auto;
+    float: right;
+    min-width: 260px;
+}
+
+#balanceBar {
+    border-left: 1px solid rgb(229, 229, 229);
+    border-right: 1px solid rgb(229, 229, 229);
+    margin-bottom: 1em;
+}
+
+@media (max-width: 900px) {
+    #left {
+        width: 100%;
+    }
+    #right {
+        width: 100%;
+    }
+    #oAuth {
+        float: right;
+    }
+    #themer {
+        float: right;
+        margin-right: 10px;
+    }
+    .logowrap {
+        display: block;
+        text-align: center;
+    }
+}
+
+.wrap {
+    overflow: auto;
+    max-width: 1400px;
+    margin: auto;
+}
+
+.column-section {
+    float: left;
+    overflow: auto;
+    margin: 0 auto;
+    padding: 1em;
+    background: none;
+    width:1100px;
+}
+
+.buttons {
+    display: block;
+    width: 1200px;
+    margin: 0 auto;
+    height: 0;
+    margin-top: -40px;
+}
+.buttons a {
+    float: left;
+    color: white;
+    top: 50px;
+    position: relative;
+    text-decoration: none;
+    font: icon;
+    font-size: 20px;
+    padding: 10px;
+    font-weight: 100;
+    padding-left: 15px;
+    padding-right: 15px;
+    letter-spacing: 1px;
+}
+.buttons a:hover {
+    background: rgba(255,255,255,.1);
+}
+.navwrap {
+    width: 100%;
+    display: block;
+    overflow: auto;
+}
+
+.navwrap img{
+    width: 200px;
+    margin: 1em;
+}
+
+
+#themer {
+    float: right;
+    color: grey;
+    background: none;
+    display: inline-block;
+    padding: 1em;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+    margin-top: 1em;
+    cursor: pointer;
+}
+#themer:hover {
+        background: rgba(0,0,0,.05);
+}
