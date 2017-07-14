@@ -37,8 +37,8 @@
         // call init(args, callback) on SessionM instance
         // to initialize the library manually, pass in the parameter `authToken`
         SessionM.init({
-            "apiKey" : "89c7ef5f669384c7fbbfe5ea748f37be8b2a5c66",
-            "baseUrl": "https://api-qa1.q-sessionm.com/api/v1/apps/",
+            "apiKey" : "API_KEY",
+            "baseUrl": "API_ENDPOINT_URL"
         })
         .catch(function(error) {
             console.warn("Got an error: " + error.errors.message);
@@ -47,9 +47,9 @@
         SessionM.createLoginButton({
             "id": "oAuth",
             "config": {
-                "loginUrl": "login-qa1.q-sessionm.com",
-                "clientId": "4c767925bedbd78db6064ec212044a273dc22ebd42e2d688bad404423423d737",
-                "callbackUrl": "http://test.q-sessionm.com:8080"
+                "loginUrl": "API_LOGIN_ENDPOINT_URL",
+                "clientId": "OAUTH_CLIENT_ID",
+                "callbackUrl": "EXAMPLE_URL:8080"
             }
         });
         SessionM.createBalanceBar({
