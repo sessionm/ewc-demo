@@ -1,19 +1,21 @@
 # Set up the Example Project
 - Download the .zip and pull the contents out into a folder on your Desktop, name it `ewc_test`
 - Open your terminal and type `sudo nano /etc/hosts`
+- EWC requires an aliased URL to connect to sessionm endpoints. This URL is determined by the cors rules in your environment.
+- For the purposes of this example project, we will use the example URL: `EXAMPLE_URL`
 - This will open your macbook's hosts file in a terminal file editor nano
 - Add the following line to the file:
-`127.0.0.1       test.q-sessionm.com`
+`127.0.0.1       EXAMPLE_URL`
     * This allows the example project to pass the QA1 cors policy and hit the API endpoints.
 - Press `Control+O` to write the file, press enter to confirm
 - Press `Control+X` to exit nano
 - Now you will navigate to the working directory
 - Type `cd ~/Desktop/ewc_test`, this takes you to the folder you made earlier
 - enter `python -m SimpleHTTPServer 8080`, this will create a local web server and host the content in the directory (You must use the port 8080 to pass QA1 cors policy)
-- Open your browser and go to `test.q-sessionm.com:8080`
+- Open your browser and go to `EXAMPLE_URL:8080`
+- The library is sessionm.js, and it is included via script tag and initialized with JS.
+- The accompanying styles are in styles.css, these styles are explicitly namespaced and can easily be overwritten and modified by including or declaring css after this file is loaded.
 
-The library is sessionm.js, and it is included via script tag and initialized with JS.
-The accompanying styles are in styles.css, these styles are explicitly namespaced and can easily be overwritten and modified by including or declaring css after this file is loaded.
 ---
 # Include appropriate files
 Open the Directory in an IDE (Atom or Sublime are nice)
@@ -54,9 +56,9 @@ Open the Directory in an IDE (Atom or Sublime are nice)
 - you can move this out to its own .js file, and you can embed it in your own js code
 ```javascript
 SessionM.init({
-    "authToken" : "v2--XqBijQF3QhZQT6JCQHDNQHJQanHlX_SrG3IZl-TmYXY=--tzwtjSCrI47gTihjVu59hokT5SFS0fcLQXqE0qciI04jrQF7OvklrSDBu0Q_kFrinw==",
-    "apiKey" : "89c7ef5f669384c7fbbfe5ea748f37be8b2a5c66",
-    "baseUrl": "https://api-qa1.q-sessionm.com/api/v1/apps/"
+    "authToken" : "USER_AUTH_TOKEN",
+    "apiKey" : "API_KEY",
+    "baseUrl": "API_ENDPOINT_URL"
 }, function() { // this callback() is invoked when the library is done loading all configs and fetches })
 .catch(function(error) {
     console.warn("Got an error: " + error.errors.message);
@@ -64,9 +66,9 @@ SessionM.init({
 SessionM.createLoginButton({
     "id": "oAuth",
     "config": {
-        "loginUrl": "login-qa1.q-sessionm.com",
-        "clientId": "4c767925bedbd78db6064ec212044a273dc22ebd42e2d688bad404423423d737",
-        "callbackUrl": "http://test.q-sessionm.com:8080"
+        "loginUrl": "API_LOGIN_ENDPOINT_URL",
+        "clientId": "OAUTH_CLIENT_ID",
+        "callbackUrl": "EXAMPLE_URL:8080"
     }
 });
 SessionM.createBalanceBar({
@@ -96,14 +98,15 @@ SessionM.createInbox({
 - the `init()` returns a `Promise()` and also takes a callback function as a parameter
 - the callback method is for when you need to execute code that is guaranteed to run after the library fully loads
 - if the `init()` does not resolve, you can call `.catch(function(error){ ... })` on it and log the error or perform appropriate actions to resolve the initialization failure, such as using backend services to generate a new auth token in the event that the library could not initialize due to an `invalid auth token`.
+
 ---
 #### `SessionM.init([Object],[Function]);`
 - Initializes the SessionM.js library and allows you create components
 ```javascript
 SessionM.init({
-    "authToken" : "v2--XqBijQF3QhZQT6JCQHDNQHJQanHlX_SrG3IZl-TmYXY=--tzwtjSCrI47gTihjVu59hokT5SFS0fcLQXqE0qciI04jrQF7OvklrSDBu0Q_kFrinw==",
-    "apiKey" : "89c7ef5f669384c7fbbfe5ea748f37be8b2a5c66",
-    "baseUrl": "https://api-qa1.q-sessionm.com/api/v1/apps/",
+    "authToken" : "USER_AUTH_TOKEN",
+    "apiKey" : "API_KEY",
+    "baseUrl": "API_ENDPOINT_URL"
     "config": { ... }
 }, function() { ... });
 ```
@@ -115,6 +118,7 @@ SessionM.init({
 
 `@param {Function}` callback a callback function that is called when promise completes. **`this will be deprecated soon`**
 `@returns {Promise}` can be used to call `.then() `to load components, and `.catch()` to resolve and log errors
+
 ---
 #### `SessionM.createLoginButton([Object]);`
 - Creates a login button, on click will redirect to a new page that will ask the user to oAuth into the sessionm platform.
@@ -124,9 +128,9 @@ SessionM.init({
 SessionM.createLoginButton({
     "id": "oAuth",
     "config": {
-        "loginUrl": "login-qa1.q-sessionm.com",
-        "clientId": "4c767925bedbd78db6064ec212044a273dc22ebd42e2d688bad404423423d737",
-        "callbackUrl": "http://test.q-sessionm.com:8080"
+        "loginUrl": "API_LOGIN_ENDPOINT_URL",
+        "clientId": "OAUTH_CLIENT_ID",
+        "callbackUrl": "EXAMPLE_URL:8080"
     }
 });
 ```
