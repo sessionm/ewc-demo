@@ -1,0 +1,14 @@
+{
+  "name": "ewc-examples",
+  "version": "1.0.0",
+  "description": "Contains example implementations of loyalty.js",
+  "main": "",
+  "scripts": {
+    "server": "sudo node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}

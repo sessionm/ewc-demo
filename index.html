@@ -2,49 +2,106 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Test</title>
-        <script src="./loyalty.js"></script>
-        <link rel="stylesheet" type="text/css" href="./loyalty.css">
-        <link rel="stylesheet" type="text/css" href="./styles/custom-styles.css">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <title>loyalty.js</title>
         <script
           src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
           integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
           crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/basicModal/3.3.8/basicModal.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/basicModal/3.3.8/basicModal.min.js"></script>
+
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <script src="./loyalty.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="./styles/custom-styles.css">
+        <link rel="stylesheet" type="text/css" href="./loyalty.css">
+
         <meta name="viewport" content="width=device-width" />
     </head>
     <body>
-        <div class="wrap">
-            <div class="navwrap">
-                <a class="logowrap" href="/">
-                    <img class="nav" src="./images/header.png" />
-                </a>
-                <i class="fa fa-paint-brush" id="themer"></i>
-                <div id="oAuth"></div>
+        <div id="headerWrap">
+            <div class="container" id="header">
+                <div class="col-sm-6 col-md-3 col-lg-3">
+                    <a href="/">
+                        <img id="logo" src="./images/header.png" />
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-4" id="greeting">
+                    Welcome
+                </div>
+                <div class="col-sm-6 col-md-3 col-lg-3">
+                    <div id="oAuth"></div>
+                </div>
+                <div class="col-sm-6 col-md-2 col-lg-2 header-buttons">
+                    <i class="fa fa-id-card-o button" id="account"></i>
+                    <i class="fa fa-user-plus button" id="referral"></i>
+                </div>
             </div>
-            <div id="balanceBar"></div>
-            <div id="left">
-                <div id="rewardStore"></div>
-                <div id="inboxNav"></div>
-                <div id="inbox"></div>
+        </div>
+        <div class="wrap container">
+            <div class="row">
+                <div id="balanceBar"></div>
             </div>
-            <div id="right">
-                <div id="earnFeed"></div>
+            <div class="row">
+                <div class="col-sm-6 col-md-8 col-lg-8">
+                    <div class="row">
+                        <div id="rewardStore"></div>
+                    </div>
+                    <div class="row">
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-4">
+                    <div id="earnFeed"></div>
+                </div>
+            </div>
+            <div class="row bottom">
+                <div class="col-lg-6">
+                    <div id="inboxNav"></div>
+                    <div id="inbox"></div>
+                </div>
+                <div class="col-lg-6">
+                    <div id="ordersTitle">Your Orders</div>
+                    <div id="orders"></div>
+                </div>
+            </div>
+        </div>
+        <div class="" id="footerWrap">
+            <div class="container" id="footer">
+                <div class="col-lg-5 info">
+                    Copyright © 2008 SessionM
+                    <img id="footerLogo" src="./images/header.png" />
+                </div>
+                <div class="col-lg-3">
+                    <div class="license">
+                        loyalty.js is licensed under the
+                        MIT License
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <i class="fa fa-facebook"></i>
+                    <i class="fa fa-twitter"></i>
+                    <i class="fa fa-google"></i>
+                    <i class="fa fa-linkedin"></i>
+                </div>
             </div>
         </div>
     </body>
     <script>
-        // call init(args, callback) on SessionM instance
         // to initialize the library manually, pass in the parameter `authToken`
-        SessionM.init({
+        var loyaltyjs = new LoyaltyJS({
             "apiKey" : "API_KEY",
             "baseUrl": "API_ENDPOINT_URL"
+            "anonToken": "API_KEY"
         })
-        .catch(function(error) {
-            console.warn("Got an error: " + error.errors.message);
+
+        loyaltyjs.getUserInfo().then((info) => {
+            $('#greeting').text(`Welcome, ${info.firstName}!`);
         });
 
-        SessionM.createLoginButton({
+        loyaltyjs.createLoginButton({
             "id": "oAuth",
             "config": {
                 "loginUrl": "API_LOGIN_ENDPOINT_URL",
@@ -52,28 +109,62 @@
                 "callbackUrl": "EXAMPLE_URL:8080"
             }
         });
-        SessionM.createBalanceBar({
+        loyaltyjs.createBalanceBar({
             "id": "balanceBar"
         });
-        SessionM.createEarnFeed({
+        loyaltyjs.createEarnFeed({
             "id": "earnFeed"
         });
-        SessionM.createRewardStore({
+        loyaltyjs.createRewardStore({
             "id": "rewardStore",
             "config": {
-                "maxOffers": 3,
+                "maxOffers": 6,
                 "showMoreIncrement": 3,
             }
         });
-        SessionM.createInboxNotifier({
+        loyaltyjs.createInboxNotifier({
             "id": "inboxNav"
         });
-        SessionM.createInbox({
+        loyaltyjs.createInbox({
             "id": "inbox"
         });
+        loyaltyjs.createOrderFeed({
+            "id": "orders"
+        });
 
-        $("#themer").click(function() {
-            $('head').append('<link rel="stylesheet" type="text/css" href="./styles/alt-theme.css">');
+        $('#account').on('click', function() {
+            basicModal.show({
+                body: '<div class="" id="account-settings"></div>',
+                closable: true,
+                buttons: {
+                    action: {
+                        title: 'Dismiss',
+                        fn: basicModal.close
+                    }
+                }
+            });
+            loyaltyjs.createAccount({
+                "id": "account-settings"
+            });
+        });
+
+        $('#referral').on('click', function() {
+            basicModal.show({
+                body: '<div id="referral-input"></div><div id="referral-list"></div>',
+                closable: true,
+                buttons: {
+                    action: {
+                        title: 'Dismiss',
+                        fn: basicModal.close
+                    }
+                }
+            });
+            loyaltyjs.createReferral({
+                "id": "referral-input"
+            });
+            loyaltyjs.createReferralList({
+                "id": "referral-list"
+            });
         });
     </script>
 </html>
